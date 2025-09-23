@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f6fc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    button {
+      flex: 1;
+      margin: 0 5px;
+      padding: 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-login {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn-hover {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .forgot {
+      display: block;
+      text-align: center;
+      margin: 10px 0;
+      font-size: 14px;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .forgot:hover {
+      text-decoration: underline;
+    }
+
+    .message {
+      text-align: center;
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .message.success {
+      color: green;
+    }
+
+    .message.error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Welcome Back</h2>
+    <form id="loginForm">
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" placeholder="Enter Username">
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter Password">
+      </div>
+      <div class="button-group">
+        <button type="submit" class="btn-login">Login</button>
+        <button type="button" class="btn-hover">Hover</button>
+      </div>
+      <a href="#" class="forgot">Forgot Password?</a>
+      <div id="message" class="message"></div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const message = document.getElementById('message');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      // Client-side validation
+      if (username === "" || password === "") {
+        message.style.display = "block";
+        message.className = "message error";
+        message.textContent = "Username and Password cannot be empty.";
+        return;
+      }
+
+      // Simulating API Call (loading state)
+      message.style.display = "block";
+      message.className = "message";
+      message.textContent = "Loading...";
+
+      setTimeout(() => {
+        // Mock API Response (Updated Credentials)
+        if (username === "Team 8" && password === "Team 8") {
+          message.className = "message success";
+          message.textContent = "✅ Success! Redirecting...";
+          // redirect simulation
+          setTimeout(() => window.location.href = "dashboard.html", 1500);
+        } else {
+          message.className = "message error";
+          message.textContent = "❌ Invalid credentials, try again.";
+        }
+      }, 1500);
+    });
+  </script>
+</body>
+</html>
