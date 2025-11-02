@@ -1,0 +1,326 @@
+/* ========================================================================= */
+:root {
+  --color-primary: #4f46e5;
+  --color-primary-dark: #4338ca;
+  --color-primary-light: #a5b4fc;
+  --color-purple: #9333ea;
+  --color-gray-dark: #1f2937;
+  --color-gray-medium: #374151;
+  --color-gray-light: #f9fafb;
+  --color-border: #d1d5db;
+  --color-border-light: #e5e7eb;
+  --shadow-base: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+}
+
+/* ========================================================================= */
+.search-form {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-base);
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+}
+
+/* ========================================================================= */
+.search-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.search-header h4 {
+  color: var(--color-gray-dark);
+  font-weight: 700;
+  font-size: 1.375rem;
+}
+
+.toggle-advanced {
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.625rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  background: linear-gradient(to right, var(--color-primary), #6366f1);
+  color: white;
+}
+
+.toggle-advanced:hover {
+  box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3);
+  transform: translateY(-1px);
+}
+
+.toggle-advanced[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.toggle-advanced.bg-purple-700 {
+  background: linear-gradient(to right, #7c3aed, var(--color-purple));
+}
+
+.toggle-advanced.bg-purple-700:hover {
+  background: linear-gradient(to right, #6d28d9, var(--color-purple));
+  box-shadow: 0 4px 8px rgba(147, 51, 234, 0.3);
+}
+
+/* ========================================================================= */
+.search-fields {
+  gap: 1.5rem;
+}
+
+.basic-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  /* CRITICAL FIX: Ensure the relative container establishes a stacking context */
+  position: relative; 
+  /* Setting a z-index here ensures the input is always above the dropdown's shadow IF 
+     the shadow extends up over the input's margin, which it is */
+  z-index: 10; 
+}
+
+.field-group label {
+  font-weight: 600;
+  color: var(--color-gray-medium);
+  font-size: 0.875rem;
+}
+
+.search-input {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  color: var(--color-gray-dark);
+  transition: all 0.2s ease;
+  /* CRITICAL FIX: Ensure the input is above the list's container (if needed) */
+  position: relative; 
+  z-index: 15; /* Higher than the list's z-index to ensure visibility */
+  background-color: white; /* Explicitly set background to prevent list showing through */
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.search-input.border-red-500 {
+  border-color: #ef4444 !important;
+}
+
+.search-input:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.advanced-fields {
+  padding: 1rem;
+  background: var(--color-gray-light);
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border-light);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.radio-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: var(--color-gray-medium);
+}
+
+/* ========================================================================= */
+.field-group.relative {
+    position: relative;
+    z-index: 10; /* Setting context here */
+}
+
+.field-group ul {
+    list-style: none;
+    padding: 0;
+    /* Adjusted margin to ensure the list starts right after the input */
+    margin: -1px 0 0 0; 
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 0.625rem;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    max-height: 12rem;
+    overflow-y: auto;
+    /* CRITICAL FIX: The suggestions list needs to float higher than everything else */
+    position: absolute;
+    z-index: 20; 
+    width: 100%; /* Ensure it spans the full width */
+}
+
+.field-group ul li {
+    padding: 0.625rem 1rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--color-gray-dark);
+    transition: background-color 0.15s ease;
+}
+
+.field-group ul li:hover {
+    background-color: #eef2ff;
+    color: var(--color-primary);
+}
+
+.field-group ul li:first-child {
+    border-top-left-radius: 0.625rem;
+    border-top-right-radius: 0.625rem;
+}
+
+.field-group ul li:last-child {
+    border-bottom-left-radius: 0.625rem;
+    border-bottom-right-radius: 0.625rem;
+}
+
+.field-group ul li.bg-gray-100 {
+    font-weight: 600;
+    color: var(--color-gray-medium);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.field-group ul li.bg-gray-100:hover {
+    background-color: #f3f4f6;
+    color: var(--color-gray-medium);
+}
+
+/* ========================================================================= */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 1.25rem;
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.625rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-btn .btn-icon {
+  font-size: 1rem;
+}
+
+.search-btn.primary {
+  background: linear-gradient(to right, var(--color-primary), var(--color-purple));
+  color: white;
+  box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
+}
+
+.search-btn.primary:hover {
+  background: linear-gradient(to right, var(--color-primary-dark), #7c3aed);
+  box-shadow: 0 6px 10px rgba(79, 70, 229, 0.3);
+  transform: translateY(-1px);
+}
+
+.search-btn.secondary {
+  background-color: #f3f4f6;
+  color: var(--color-gray-medium);
+}
+
+.search-btn.secondary:hover {
+  background-color: #e5e7eb;
+  color: var(--color-gray-dark);
+  transform: translateY(-1px);
+}
+
+.search-btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ========================================================================= */
+.mt-4.p-3 {
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+}
+.bg-red-50 {
+  background-color: #fef2f2;
+  border-color: #fee2e2;
+  color: #b91c1c;
+}
+.bg-yellow-50 {
+  background-color: #fffbeb;
+  border-color: #fde68a;
+  color: #b45309;
+}
+
+
+/* ========================================================================= */
+@media (max-width: 768px) {
+  .search-form {
+    padding: 1.25rem;
+  }
+
+  .search-header {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .basic-fields {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .search-btn {
+    width: 100%;
+  }
+}

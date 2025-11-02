@@ -1,0 +1,124 @@
+.transaction-row {
+  transition: all 0.3s ease;
+}
+
+.transaction-row:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.debit-row {
+  border-left: 3px solid #fc8181;
+}
+
+.credit-row {
+  border-left: 3px solid #68d391;
+}
+
+.ref-number {
+  font-family: 'Monaco', 'Consolas', monospace;
+  font-size: 0.8rem;
+}
+
+.ref-badge {
+  background: #edf2f7;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+.date-time {
+  color: #718096;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.description {
+  max-width: 200px;
+}
+
+.desc-text {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.desc-pos {
+  background: #fff5f5;
+  color: #c53030;
+}
+
+.desc-salary {
+  background: #f0fff4;
+  color: #276749;
+}
+
+.desc-interest {
+  background: #ebf8ff;
+  color: #2c5aa0;
+}
+
+.desc-gst {
+  background: #faf5ff;
+  color: #6b46c1;
+}
+
+.desc-transfer {
+  background: #fffaf0;
+  color: #dd6b20;
+}
+
+.desc-default {
+  background: #f7fafc;
+  color: #4a5568;
+}
+
+.amount-cell {
+  text-align: right;
+  font-family: 'Monaco', 'Consolas', monospace;
+}
+
+.amount {
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+}
+
+.amount.debit {
+  background: #fff5f5;
+  color: #e53e3e;
+}
+
+.amount.credit {
+  background: #f0fff4;
+  color: #38a169;
+}
+
+.amount.balance {
+  background: #ebf8ff;
+  color: #3182ce;
+  font-weight: 700;
+}
+
+.amount.zero {
+  color: #a0aec0;
+  background: transparent;
+}
+
+@media (max-width: 768px) {
+  .description {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .ref-badge, .desc-text, .amount {
+    font-size: 0.75rem;
+    padding: 2px 6px;
+  }
+}
+
