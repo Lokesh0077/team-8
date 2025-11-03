@@ -70,10 +70,6 @@ There are no test scripts defined in `package.json` at the moment. You can add a
 ## Environment / API
 This frontend talks to backend APIs through files in `src/services/`. The base URL or auth details may be configured in those service files (for example, look at `src/services/*.js`). Adjust accordingly for your backend environment.
 
-## Adding a license / contributing
-- If this is an open-source project, add a `LICENSE` file at the repo root.
-- Add a `CONTRIBUTING.md` if you want contribution guidelines.
-
 ## Troubleshooting
 - If you see errors about Node version, install a matching Node that satisfies `package.json` engines.
 - If styles aren't applied, ensure Tailwind is built and `src/style.css` (or the imported CSS) is included.
@@ -82,5 +78,3 @@ This frontend talks to backend APIs through files in `src/services/`. The base U
 - Add a `test` script and tests (unit and integration). A minimal test already exists under `tests/unit/PasswordChange.spec.ts` — add a runner and script.
 - Add CI (GitHub Actions) to run lint/build/tests on PRs.
 
----
-Generated instructions assume the standard Vite setup and the scripts shown in `package.json` (dev/build/preview/lint/format). If you want, I can also add a simple `test` script and basic GitHub Actions workflow.
